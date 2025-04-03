@@ -15,7 +15,7 @@ page_bg_img = '''
 '''
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
-# 🎨 Стиль для selectbox, заголовків та блоку інсайтів
+# 🎨 Стиль для selectbox, заголовків та expander'ів
 st.markdown('''
 <style>
 /* Контейнер selectbox */
@@ -52,17 +52,19 @@ h1, .st-subheader, h2 {
 
 /* Стиль для expander */
 .streamlit-expander {
-    background-color: rgba(255, 255, 255, 0.85) !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
     border-radius: 12px !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-top: 10px;
-    overflow: hidden;
+    margin-top: 12px;
+    padding: 2px;
 }
+
 .streamlit-expanderHeader {
     font-weight: bold;
     color: #000000 !important;
     background-color: rgba(255, 255, 255, 0.6) !important;
     padding: 10px;
+    border-radius: 10px !important;
 }
 </style>
 ''', unsafe_allow_html=True)
@@ -104,13 +106,13 @@ st.markdown(
 )
 
 dot = Digraph()
-dot.attr(rankdir='LR')  # Горизонтально
+dot.attr(rankdir='LR')
 dot.attr(bgcolor='white')
 dot.attr('node', shape='box', style='filled', fontname='Arial', fontsize='11', color='lightblue')
 
 dot.node("Книга", "📘 Можливо все")
 
-# Тільки перші 10 рядків (або фільтровані)
+# Побудова мапи
 for i, row in df.head(10).iterrows():
     chapter = row.get("Назва розділу", f"Розділ {i}")
     insight = str(row.get("Інсайти", "")).strip()
@@ -129,12 +131,9 @@ for i, row in df.head(10).iterrows():
 
 st.graphviz_chart(dot, use_container_width=True)
 
-# 🔍 Повні інсайти — окремий контейнер із фоном
+# 🔍 Повні інсайти
 with st.container():
-    st.markdown("""
-        <div class="insight-block">
-        <h3 style='color: #000000;'>🔍 Повні інсайти</h3>
-    """, unsafe_allow_html=True)
+    st.markdown("""<div class="insight-block"><h3 style='color: #000000;'>🔍 Повні інсайти</h3>""", unsafe_allow_html=True)
 
     for i, row in df.head(10).iterrows():
         chapter = row.get("Назва розділу", f"Розділ {i}")
