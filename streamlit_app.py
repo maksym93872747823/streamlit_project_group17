@@ -141,8 +141,7 @@ with st.container():
                 """, unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
-
-# 📖 Розділи книги — читабельні expander'и
+# 📖 Розділи книги — у стилі Повні інсайти
 st.markdown("---")
 st.markdown("<h3 style='color: #000000;'>📖 Розділи книги</h3>", unsafe_allow_html=True)
 
@@ -159,17 +158,22 @@ chapters = [
     "РОЗДІЛ 9. «Та на все це життя не вистачить!» – Ганна Т."
 ]
 
-for chapter_title in chapters:
-    with st.expander("", expanded=False):
+for title in chapters:
+    with st.expander(""):
         st.markdown(f"""
-            <div style="background-color: rgba(255,255,255,0.95); 
-                        padding: 15px; 
-                        border-radius: 12px; 
-                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
-                        color: #000000;">
-                <strong>📖 {chapter_title}</strong><br><br>
+        <div style="
+            background-color: rgba(255,255,255,0.95);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            color: #000000;
+            font-weight: bold;
+        ">
+            📖 {title}
+            <p style="font-weight: normal; margin-top: 10px;">
                 Тут можна додати короткий опис, цитати, нотатки або рефлексії по цьому розділу.
-            </div>
+            </p>
+        </div>
         """, unsafe_allow_html=True)
 
 
