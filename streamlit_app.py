@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-# Фоновое изображение
+# Фонове зображення
 page_bg_img = '''
 <style>
 .stApp {
@@ -10,7 +10,7 @@ page_bg_img = '''
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    min-height: 100vh; /* Покрывает весь экран */
+    min-height: 100vh;
 }
 </style>
 '''
@@ -28,26 +28,22 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
-# Подключение Google Таблицы
+# Підключення Google Таблиці
 url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3cQlzWgr-dv_MC_usm7D2Lr2-XGG7HosOcMvLMQF3_e672gdHaTo8jxpJ77fwrPrwjKNyRh53IjLT/pub?output=csv"
 df = pd.read_csv(url)
 
-# Фільтри
-if "Ім'я" in df.columns:
-    selected_author = st.selectbox("Обрати учасника", ["Всі"] + sorted(df["Ім'я"].dropna().unique()))
+# Фільтр по учаснику
+if "Учасник" in df.columns:
+    selected_author = st.selectbox("Обрати учасника", ["Всі"] + sorted(df["Учасник"].dropna().unique()))
     if selected_author != "Всі":
-        df = df[df["Ім'я"] == selected_author]
+        df = df[df["Учасник"] == selected_author]
 
+# Фільтр по назві розділу
 if "Назва розділу" in df.columns:
     selected_chapter = st.selectbox("Обрати розділ", ["Всі"] + sorted(df["Назва розділу"].dropna().unique()))
     if selected_chapter != "Всі":
         df = df[df["Назва розділу"] == selected_chapter]
 
-# Виведення таблиці після фільтрації
-st.subheader("Результати після фільтрації")
-st.dataframe(df)
-
-# Вивід таблиці після фільтрації
+# Вивід таблиці після фільтрації (ОДИН РАЗ!)
 st.subheader("Результати після фільтрації")
 st.dataframe(df)
