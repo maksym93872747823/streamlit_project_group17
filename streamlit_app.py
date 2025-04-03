@@ -19,19 +19,18 @@ df = pd.read_csv(url)
 st.write("Назви колонок:", df.columns.tolist())
 
 
-# Фільтр по авторам
-if 'Автор' in df.columns:
-    selected_author = st.selectbox("Обрати автора", options=["Всі"] + sorted(df['Автор'].dropna().unique()))
+# Фільтр по імені (Автор)
+if "Ім'я" in df.columns:
+    selected_author = st.selectbox("Обрати учасника", ["Всі"] + sorted(df["Ім'я"].dropna().unique()))
     if selected_author != "Всі":
-        df = df[df['Автор'] == selected_author]
+        df = df[df["Ім'я"] == selected_author]
 
-# Фільтр по главах
-if 'Глава' in df.columns:
-    selected_chapter = st.selectbox("Обрати главу", options=["Всі"] + sorted(df['Глава'].dropna().unique()))
+# Фільтр по назві розділу (Глава)
+if "Назва розділу" in df.columns:
+    selected_chapter = st.selectbox("Обрати розділ", ["Всі"] + sorted(df["Назва розділу"].dropna().unique()))
     if selected_chapter != "Всі":
-        df = df[df['Глава'] == selected_chapter]
+        df = df[df["Назва розділу"] == selected_chapter]
 
 # Вивід таблиці після фільтрації
 st.subheader("Результати після фільтрації")
 st.dataframe(df)
-
