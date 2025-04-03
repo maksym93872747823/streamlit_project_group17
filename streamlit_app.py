@@ -15,17 +15,16 @@ page_bg_img = '''
 '''
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
-# 🎨 Стиль для selectbox, заголовків та блоку інсайтів
+# 🎨 Стилі
 st.markdown('''
 <style>
-/* Контейнер selectbox */
+/* Стиль selectbox */
 div[data-baseweb="select"] {
     background-color: rgba(255, 255, 255, 0.85) !important;
     border-radius: 8px !important;
     padding: 4px !important;
 }
-
-/* Текст підпису */
+/* Текст label */
 label {
     background-color: rgba(255, 255, 255, 0.85) !important;
     color: #000000 !important;
@@ -35,13 +34,11 @@ label {
     display: inline-block;
     margin-bottom: 4px;
 }
-
 /* Заголовки */
 h1, .st-subheader, h2 {
     color: #000000 !important;
 }
-
-/* Блок повних інсайтів */
+/* Повні інсайти - контейнер */
 .insight-block {
     background-color: rgba(255, 255, 255, 0.85);
     padding: 25px;
@@ -49,13 +46,19 @@ h1, .st-subheader, h2 {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     margin-top: 40px;
 }
-
-/* Стиль для expander всередині блоку */
+/* Expander */
+.streamlit-expander {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 12px;
+}
 .streamlit-expanderHeader {
     font-weight: bold;
     color: #000000 !important;
     background-color: rgba(255, 255, 255, 0.6) !important;
-    border-radius: 8px !important;
+    padding: 10px;
+    border-radius: 10px !important;
 }
 </style>
 ''', unsafe_allow_html=True)
@@ -69,7 +72,7 @@ st.markdown("""
     <hr style='border: 1px solid #444;'/>
 """, unsafe_allow_html=True)
 
-# 📊 Підключення Google Таблиці
+# 📊 Завантаження даних
 url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3cQlzWgr-dv_MC_usm7D2Lr2-XGG7HosOcMvLMQF3_e672gdHaTo8jxpJ77fwrPrwjKNyRh53IjLT/pub?output=csv"
 df = pd.read_csv(url)
 
@@ -97,13 +100,11 @@ st.markdown(
 )
 
 dot = Digraph()
-dot.attr(rankdir='LR')  # Горизонтально
+dot.attr(rankdir='LR')
 dot.attr(bgcolor='white')
 dot.attr('node', shape='box', style='filled', fontname='Arial', fontsize='11', color='lightblue')
-
 dot.node("Книга", "📘 Можливо все")
 
-# Тільки перші 10 рядків (або фільтровані)
 for i, row in df.head(10).iterrows():
     chapter = row.get("Назва розділу", f"Розділ {i}")
     insight = str(row.get("Інсайти", "")).strip()
@@ -122,12 +123,9 @@ for i, row in df.head(10).iterrows():
 
 st.graphviz_chart(dot, use_container_width=True)
 
-# 🔍 Повні інсайти — окремий контейнер із фоном
+# 🔍 Повні інсайти
 with st.container():
-    st.markdown("""
-        <div style='background-color: rgba(255, 255, 255, 0.85); padding: 25px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin-top: 40px;'>
-        <h3 style='color: #000000;'>🔍 Повні інсайти</h3>
-    """, unsafe_allow_html=True)
+    st.markdown("""<div class="insight-block"><h3 style='color: #000000;'>🔍 Повні інсайти</h3>""", unsafe_allow_html=True)
 
     for i, row in df.head(10).iterrows():
         chapter = row.get("Назва розділу", f"Розділ {i}")
@@ -136,4 +134,10 @@ with st.container():
 
         if chapter and insight:
             with st.expander(f"📖 {chapter} – {author}"):
-                st.markdown(f"<div style='color: #000000;'>{insight}</div>", unsafe_allow_html=True)
+                st.markdown(f"""
+                    <div style="background-color: rgba(255,255,255,0.95); padding: 15px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); color: #000000;">
+                        {insight}
+                    </div>
+                """, unsafe_allow_html=True)
+
+    st.markdown("</div>", unsafe_allow_html=True)
