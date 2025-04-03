@@ -4,14 +4,17 @@ import pandas as pd
 page_bg_img = '''
 <style>
 body {
-background-image: url("https://raw.githubusercontent.com/maksym93872747823/streamlit_project_group17/main/mountain_bg.jpg");
-background-size: cover;
-background-repeat: no-repeat;
-background-attachment: fixed;
+    background-image: url("https://raw.githubusercontent.com/maksym93872747823/streamlit_project_group17/main/mountain_bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100%;
 }
 </style>
 '''
 st.markdown(page_bg_img, unsafe_allow_html=True)
+
 
 # Заголовок
 st.markdown(
