@@ -16,7 +16,7 @@ st.markdown(
 # Подключение Google Таблицы
 url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3cQlzWgr-dv_MC_usm7D2Lr2-XGG7HosOcMvLMQF3_e672gdHaTo8jxpJ77fwrPrwjKNyRh53IjLT/pub?output=csv"
 df = pd.read_csv(url)
-st.write("Назви колонок:", df.columns.tolist())
+
 
 
 # Фільтр по імені (Автор)
