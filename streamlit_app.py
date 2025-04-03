@@ -1,5 +1,27 @@
 import streamlit as st
 import pandas as pd
+# Фонове зображення (обкладинка книги)
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url("https://raw.githubusercontent.com/maksym93872747823/streamlit_project_group17/main/380056_1.webp");
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .block-container {
+        background-color: rgba(0, 0, 0, 0.75); /* затемненный фон под текст */
+        padding: 2rem;
+        border-radius: 12px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 
 # Заголовок
 st.markdown(
