@@ -32,11 +32,12 @@ st.markdown(
 url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3cQlzWgr-dv_MC_usm7D2Lr2-XGG7HosOcMvLMQF3_e672gdHaTo8jxpJ77fwrPrwjKNyRh53IjLT/pub?output=csv"
 df = pd.read_csv(url)
 
-# Фільтр по учаснику
+# Фільтр по учаснику (назва колонки "Учасник")
 if "Учасник" in df.columns:
     selected_author = st.selectbox("Обрати учасника", ["Всі"] + sorted(df["Учасник"].dropna().unique()))
     if selected_author != "Всі":
         df = df[df["Учасник"] == selected_author]
+
 
 # Фільтр по назві розділу
 if "Назва розділу" in df.columns:
