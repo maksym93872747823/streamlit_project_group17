@@ -104,6 +104,21 @@ for i, row in df.head(10).iterrows():
         dot.edge(chapter_node, insight_node)
 
 st.graphviz_chart(dot, use_container_width=True)
+
+# Стіль для блоку інсайтів
+st.markdown('''
+    <style>
+    .insight-block {
+        background-color: rgba(255, 255, 255, 0.85);
+        padding: 20px;
+        border-radius: 12px;
+        margin-top: 20px;
+    }
+    </style>
+''', unsafe_allow_html=True)
+
+st.markdown('<div class="insight-block">', unsafe_allow_html=True)
+
 st.markdown("### 🔍 Повні інсайти")
 for i, row in df.head(10).iterrows():
     chapter = row.get("Назва розділу", f"Розділ {i}")
