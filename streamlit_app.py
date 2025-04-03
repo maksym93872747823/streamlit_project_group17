@@ -44,9 +44,18 @@ h1, .st-subheader, h2 {
 /* Блок повних інсайтів */
 .insight-block {
     background-color: rgba(255, 255, 255, 0.85);
-    padding: 20px;
-    border-radius: 12px;
-    margin-top: 20px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin-top: 40px;
+}
+
+/* Стиль для expander всередині блоку */
+.streamlit-expanderHeader {
+    font-weight: bold;
+    color: #000000 !important;
+    background-color: rgba(255, 255, 255, 0.6) !important;
+    border-radius: 8px !important;
 }
 </style>
 ''', unsafe_allow_html=True)
@@ -114,10 +123,8 @@ for i, row in df.head(10).iterrows():
 st.graphviz_chart(dot, use_container_width=True)
 
 # 🔍 Повні інсайти — блок з білим фоном і стилізацією
-st.markdown("""
-<div style='background-color: rgba(255, 255, 255, 0.85); padding: 25px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin-top: 40px;'>
-<h3 style='color: #000000;'>🔍 Повні інсайти</h3>
-""", unsafe_allow_html=True)
+st.markdown('<div class="insight-block">', unsafe_allow_html=True)
+st.markdown("### 🔍 Повні інсайти")
 
 for i, row in df.head(10).iterrows():
     chapter = row.get("Назва розділу", f"Розділ {i}")
@@ -129,4 +136,3 @@ for i, row in df.head(10).iterrows():
             st.write(insight)
 
 st.markdown("</div>", unsafe_allow_html=True)
-
