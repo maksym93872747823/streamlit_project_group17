@@ -48,3 +48,34 @@ if "Назва розділу" in df.columns:
 # Вивід таблиці після фільтрації (ОДИН РАЗ!)
 st.subheader("Результати після фільтрації")
 st.dataframe(df)
+
+# --- Mind Map після таблиці ---
+from graphviz import Digraph
+
+st.markdown("---")
+st.subheader("🧠 Mind Map – Основні інсайти з книги")
+
+dot = Digraph()
+dot.attr(bgcolor='white')
+dot.attr('node', shape='box', style='filled', fontname='Arial', color='lightblue')
+
+dot.node("Книга", "📘 Можливо все")
+
+# Показуємо лише перші 10 рядків (для краси та швидкості)
+for i, row in df.head(10).iterrows():
+    chapter = row.get("Назва розділу", f"Розділ {i}")
+    insight = row.get("Інсайти", "").strip()
+    author = row.get("Учасник", "")
+
+    if pd.notna(chapter) and pd.notna(insight):
+        chapter_node = f"chapter_{i}"
+        insight_node = f"insight_{i}"
+
+        dot.node(chapter_node, f"📖 {chapter}", color='lightgreen')
+        dot.edge("Книга", chapter_node)
+
+        short = insight[:60] + "..." if len(insight) > 60 else insight
+        dot.node(insight_node, f"💡 {short}\n👤 {author}", color='lightyellow')
+        dot.edge(chapter_node, insight_node)
+
+st.graphviz_chart(dot)
