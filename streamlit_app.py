@@ -1,26 +1,28 @@
 import streamlit as st
 import pandas as pd
-# Фонове зображення (обкладинка книги)
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-image: url("https://raw.githubusercontent.com/maksym93872747823/streamlit_project_group17/main/background.png");
-        background-size: cover;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-
-    .block-container {
-        background-color: rgba(0, 0, 0, 0.75); /* затемнение для текста */
-        padding: 2rem;
-        border-radius: 12px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# Фонове зображення 
+page_bg_img = '''
+<style>
+body {
+background-image: url("https://raw.githubusercontent.com/maksym93872747823/streamlit_project_group17/main/mountain_bg.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+</style>
+'''
+st.markdown(page_bg_img, unsafe_allow_html=True)# 🌄 ФОН — УСТАНАВЛИВАЕМ КРАСИВЫЙ ФОН С ГОР
+page_bg_img = '''
+<style>
+body {
+background-image: url("https://raw.githubusercontent.com/maksym93872747823/streamlit_project_group17/main/mountain_bg.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+</style>
+'''
+st.markdown(page_bg_img, unsafe_allow_html=True)
 
 
 
