@@ -140,19 +140,3 @@ with st.container():
 
     st.markdown("</div>", unsafe_allow_html=True)
 
-# 📚 Повторні розділи книги після інсайтів — у стилізованому білому блоці
-with st.container():
-    st.markdown("""
-        <div style='background-color: rgba(255, 255, 255, 0.85); padding: 25px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin-top: 30px;'>
-        <h3 style='color: #000000;'>📖 Розділи книги (повторний список)</h3>
-    """, unsafe_allow_html=True)
-
-    for i, row in df.head(10).iterrows():
-        chapter = row.get("Назва розділу", f"Розділ {i}")
-        author = str(row.get("Учасник", "")).strip()
-
-        if chapter:
-            with st.expander(f"📖 {chapter} – {author}"):
-                st.markdown(f"<div style='color: #000000;'>Тут може бути додатковий текст або залишити порожнім.</div>", unsafe_allow_html=True)
-
-    st.markdown("</div>", unsafe_allow_html=True)
