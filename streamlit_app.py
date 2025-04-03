@@ -50,12 +50,19 @@ h1, .st-subheader, h2 {
     margin-top: 40px;
 }
 
-/* Стиль для expander всередині блоку */
+/* Стиль для expander */
+.streamlit-expander {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    overflow: hidden;
+}
 .streamlit-expanderHeader {
     font-weight: bold;
     color: #000000 !important;
     background-color: rgba(255, 255, 255, 0.6) !important;
-    border-radius: 8px !important;
+    padding: 10px;
 }
 </style>
 ''', unsafe_allow_html=True)
@@ -125,7 +132,7 @@ st.graphviz_chart(dot, use_container_width=True)
 # 🔍 Повні інсайти — окремий контейнер із фоном
 with st.container():
     st.markdown("""
-        <div style='background-color: rgba(255, 255, 255, 0.85); padding: 25px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin-top: 40px;'>
+        <div class="insight-block">
         <h3 style='color: #000000;'>🔍 Повні інсайти</h3>
     """, unsafe_allow_html=True)
 
@@ -139,4 +146,5 @@ with st.container():
                 st.markdown(f"<div style='color: #000000;'>{insight}</div>", unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
+
 
