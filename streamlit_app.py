@@ -104,3 +104,12 @@ for i, row in df.head(10).iterrows():
         dot.edge(chapter_node, insight_node)
 
 st.graphviz_chart(dot, use_container_width=True)
+st.markdown("### 🔍 Повні інсайти")
+for i, row in df.head(10).iterrows():
+    chapter = row.get("Назва розділу", f"Розділ {i}")
+    insight = str(row.get("Інсайти", "")).strip()
+    author = str(row.get("Учасник", "")).strip()
+    
+    if chapter and insight:
+        with st.expander(f"📖 {chapter} – {author}"):
+            st.write(insight)
