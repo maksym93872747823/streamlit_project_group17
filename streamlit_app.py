@@ -13,7 +13,6 @@ background-attachment: fixed;
 '''
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
-
 # Заголовок
 st.markdown(
     """
