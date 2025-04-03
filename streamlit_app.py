@@ -140,3 +140,19 @@ with st.container():
 
     st.markdown("</div>", unsafe_allow_html=True)
 
+/* Блок повних інсайтів */
+.streamlit-expander {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+/* Заголовок розгортки */
+.streamlit-expanderHeader {
+    font-weight: bold;
+    color: #000000 !important;
+    background-color: rgba(255, 255, 255, 0.6) !important;
+    padding: 10px;
+}
