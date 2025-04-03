@@ -27,8 +27,13 @@ div[data-baseweb="select"] {
 
 /* Текст подписи */
 label {
+    background-color: rgba(255, 255, 255, 0.85) !important;
     color: #000000 !important;
     font-weight: 600 !important;
+    padding: 6px 10px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 4px;
 }
 
 /* Заголовки */
