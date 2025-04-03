@@ -148,17 +148,33 @@ with st.container():
 
     if chapter and insight:
         with st.container():
-            with st.expander(f"📖 {chapter} – {author}"):
-                st.markdown(f"""
-                    <div style="
-                        background-color: rgba(255, 255, 255, 0.95);
-                        padding: 15px;
-                        border-radius: 12px;
-                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                        color: #000000;
-                    ">
-                        {insight}
-                    </div>
-                """, unsafe_allow_html=True)
+          # 🔍 Повні інсайти — окремий контейнер із фоном
+with st.container():
+    st.markdown("""
+        <div class="insight-block">
+        <h3 style='color: #000000;'>🔍 Повні інсайти</h3>
+    """, unsafe_allow_html=True)
+
+    for i, row in df.head(10).iterrows():
+        chapter = row.get("Назва розділу", f"Розділ {i}")
+        insight = str(row.get("Інсайти", "")).strip()
+        author = str(row.get("Учасник", "")).strip()
+
+        if chapter and insight:
+            with st.container():
+                with st.expander(f"📖 {chapter} – {author}"):
+                    st.markdown(f"""
+                        <div style="
+                            background-color: rgba(255, 255, 255, 0.95);
+                            padding: 15px;
+                            border-radius: 12px;
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                            color: #000000;
+                        ">
+                            {insight}
+                        </div>
+                    """, unsafe_allow_html=True)
+
+    st.markdown("</div>", unsafe_allow_html=True)
 
 
