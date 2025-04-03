@@ -15,7 +15,7 @@ page_bg_img = '''
 '''
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
-# 🎨 Стиль для selectbox и заголовков
+# 🎨 Стиль для selectbox, заголовків та блоку інсайтів
 st.markdown('''
 <style>
 /* Контейнер selectbox */
@@ -25,7 +25,7 @@ div[data-baseweb="select"] {
     padding: 4px !important;
 }
 
-/* Текст подписи */
+/* Текст підпису */
 label {
     background-color: rgba(255, 255, 255, 0.85) !important;
     color: #000000 !important;
@@ -39,6 +39,14 @@ label {
 /* Заголовки */
 h1, .st-subheader, h2 {
     color: #000000 !important;
+}
+
+/* Блок повних інсайтів */
+.insight-block {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
 }
 </style>
 ''', unsafe_allow_html=True)
@@ -105,26 +113,17 @@ for i, row in df.head(10).iterrows():
 
 st.graphviz_chart(dot, use_container_width=True)
 
-# Стіль для блоку інсайтів
-st.markdown('''
-    <style>
-    .insight-block {
-        background-color: rgba(255, 255, 255, 0.85);
-        padding: 20px;
-        border-radius: 12px;
-        margin-top: 20px;
-    }
-    </style>
-''', unsafe_allow_html=True)
-
+# 🔍 Повні інсайти з фоном
 st.markdown('<div class="insight-block">', unsafe_allow_html=True)
-
 st.markdown("### 🔍 Повні інсайти")
+
 for i, row in df.head(10).iterrows():
     chapter = row.get("Назва розділу", f"Розділ {i}")
     insight = str(row.get("Інсайти", "")).strip()
     author = str(row.get("Учасник", "")).strip()
-    
+
     if chapter and insight:
         with st.expander(f"📖 {chapter} – {author}"):
             st.write(insight)
+
+st.markdown('</div>', unsafe_allow_html=True)
