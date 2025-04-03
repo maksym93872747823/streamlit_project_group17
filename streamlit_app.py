@@ -17,6 +17,25 @@ page_bg_img = '''
 '''
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
+# Стиль для селекторів та заголовків
+st.markdown("""
+    <style>
+    .stSelectbox > div > div {
+        color: black !important;
+        background-color: rgba(255,255,255,0.8) !important;
+        border-radius: 8px;
+        padding: 5px;
+    }
+    .stSelectbox label {
+        color: black !important;
+        font-weight: bold;
+    }
+    .st-subheader, h2, h3, h4 {
+        color: black !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # Заголовок
 st.markdown(
     """
@@ -50,12 +69,17 @@ st.subheader("Результати після фільтрації")
 st.dataframe(df)
 
 # Mind Map
-st.markdown("---")
-st.subheader("🧠 Mind Map – Основні інсайти з книги")
+st.markdown("<hr>", unsafe_allow_html=True)
+st.markdown(
+    "<h2 style='text-align: center; color: black; background-color: rgba(255, 255, 255, 0.7); padding: 8px; border-radius: 10px;'>🧠 Mind Map – Основні інсайти з книги</h2>",
+    unsafe_allow_html=True
+)
 
 dot = Digraph()
+dot.attr(rankdir='LR')  # Горизонтально
 dot.attr(bgcolor='white')
-dot.attr('node', shape='box', style='filled', fontname='Arial', color='lightblue')
+dot.attr('node', shape='box', style='filled', fontname='Arial', fontsize='12', color='lightblue')
+
 dot.node("Книга", "📘 Можливо все")
 
 # Показати перші 10 рядків
@@ -63,16 +87,3 @@ for i, row in df.head(10).iterrows():
     chapter = row["Назва розділу"] if "Назва розділу" in row and pd.notna(row["Назва розділу"]) else f"Розділ {i}"
     insight = str(row["Інсайти"]).strip() if "Інсайти" in row and pd.notna(row["Інсайти"]) else ""
     author = str(row["Учасник"]).strip() if "Учасник" in row and pd.notna(row["Учасник"]) else ""
-
-    if chapter and insight:
-        chapter_node = f"chapter_{i}"
-        insight_node = f"insight_{i}"
-
-        dot.node(chapter_node, f"📖 {chapter}", color='lightgreen')
-        dot.edge("Книга", chapter_node)
-
-        short = insight[:60] + "..." if len(insight) > 60 else insight
-        dot.node(insight_node, f"💡 {short}\n👤 {author}", color='lightyellow')
-        dot.edge(chapter_node, insight_node)
-
-st.graphviz_chart(dot)
