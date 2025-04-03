@@ -18,11 +18,13 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 # 🎨 Стилі
 st.markdown('''
 <style>
+/* Стиль selectbox */
 div[data-baseweb="select"] {
     background-color: rgba(255, 255, 255, 0.85) !important;
     border-radius: 8px !important;
     padding: 4px !important;
 }
+/* Текст label */
 label {
     background-color: rgba(255, 255, 255, 0.85) !important;
     color: #000000 !important;
@@ -32,9 +34,11 @@ label {
     display: inline-block;
     margin-bottom: 4px;
 }
+/* Заголовки */
 h1, .st-subheader, h2 {
     color: #000000 !important;
 }
+/* Повні інсайти - контейнер */
 .insight-block {
     background-color: rgba(255, 255, 255, 0.85);
     padding: 25px;
@@ -42,6 +46,7 @@ h1, .st-subheader, h2 {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     margin-top: 40px;
 }
+/* Expander */
 .streamlit-expander {
     background-color: rgba(255, 255, 255, 0.95) !important;
     border-radius: 12px !important;
@@ -108,8 +113,10 @@ for i, row in df.head(10).iterrows():
     if chapter and insight:
         chapter_node = f"chapter_{i}"
         insight_node = f"insight_{i}"
+
         dot.node(chapter_node, f"📖 {chapter}", color='lightgreen')
         dot.edge("Книга", chapter_node)
+
         short = insight[:70] + "..." if len(insight) > 70 else insight
         dot.node(insight_node, f"💡 {short}\n👤 {author}", color='lightyellow')
         dot.edge(chapter_node, insight_node)
@@ -134,31 +141,3 @@ with st.container():
                 """, unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
-
-# 📖 Розділи книги – стиль як у "Повні інсайти"
-st.markdown("---")
-st.markdown("<div class='insight-block'><h3 style='color: #000000;'>📖 Розділи книги</h3>", unsafe_allow_html=True)
-
-chapters = [
-    "ВСТУП – Аліна",
-    "РОЗДІЛ 1. Чи можливо, що можливо все? – Анна Котова",
-    "РОЗДІЛ 2. «Вітер змін» – Максим Петроченко",
-    "РОЗДІЛ 3. Початок відліку — у голові – Інна / Христина",
-    "РОЗДІЛ 4. Що для мене найважливіше? – Анжела",
-    "РОЗДІЛ 5. Розберімося, чого ви насправді хочете! – Анна Кіншова",
-    "РОЗДІЛ 6. Час діяти! – Рома",
-    "РОЗДІЛ 7. «Уперед і тільки вперед!» – Віталій / Лєна",
-    "РОЗДІЛ 8. Рішення — ключ до неможливого – Іван",
-    "РОЗДІЛ 9. «Та на все це життя не вистачить!» – Ганна Т."
-]
-
-for chapter_title in chapters:
-    with st.expander(f"📖 {chapter_title}"):
-        st.markdown(
-            "<div style='background-color: rgba(255,255,255,0.95); padding: 15px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); color: #000000;'>"
-            "Тут можна додати короткий опис або залишити поле для нотаток."
-            "</div>",
-            unsafe_allow_html=True
-        )
-
-st.markdown("</div>", unsafe_allow_html=True)
