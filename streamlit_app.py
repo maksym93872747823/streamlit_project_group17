@@ -5,7 +5,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url("https://raw.githubusercontent.com/maksym93872747823/streamlit_project_group17/main/background.jpg");
+        background-image: url("https://raw.githubusercontent.com/maksym93872747823/streamlit_project_group17/main/background.png");
         background-size: cover;
         background-attachment: fixed;
         background-repeat: no-repeat;
@@ -13,7 +13,7 @@ st.markdown(
     }
 
     .block-container {
-        background-color: rgba(0, 0, 0, 0.75); /* затемнение для читабельности */
+        background-color: rgba(0, 0, 0, 0.75); /* затемнение для текста */
         padding: 2rem;
         border-radius: 12px;
     }
