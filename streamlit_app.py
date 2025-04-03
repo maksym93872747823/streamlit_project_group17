@@ -53,7 +53,7 @@ h1, .st-subheader, h2 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin-top: 12px;
 }
-/* Заголовок Expander – финальный фикс */
+/* Финальный фикс заголовков Expander */
 .streamlit-expanderHeader {
     font-weight: bold;
     color: #000000 !important;
@@ -67,7 +67,6 @@ h1, .st-subheader, h2 {
     z-index: 10;
     position: relative;
 }
-
 </style>
 ''', unsafe_allow_html=True)
 
@@ -147,7 +146,3 @@ with st.container():
                         {insight}
                     </div>
                 """, unsafe_allow_html=True)
-
-    st.markdown("</div>", unsafe_allow_html=True)
-
-
