@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from graphviz import Digraph
 
 # Фонове зображення
 page_bg_img = '''
@@ -32,12 +33,11 @@ st.markdown(
 url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3cQlzWgr-dv_MC_usm7D2Lr2-XGG7HosOcMvLMQF3_e672gdHaTo8jxpJ77fwrPrwjKNyRh53IjLT/pub?output=csv"
 df = pd.read_csv(url)
 
-# Фільтр по учаснику (назва колонки "Учасник")
+# Фільтр по учаснику
 if "Учасник" in df.columns:
     selected_author = st.selectbox("Обрати учасника", ["Всі"] + sorted(df["Учасник"].dropna().unique()))
     if selected_author != "Всі":
         df = df[df["Учасник"] == selected_author]
-
 
 # Фільтр по назві розділу
 if "Назва розділу" in df.columns:
@@ -45,29 +45,26 @@ if "Назва розділу" in df.columns:
     if selected_chapter != "Всі":
         df = df[df["Назва розділу"] == selected_chapter]
 
-# Вивід таблиці після фільтрації (ОДИН РАЗ!)
+# Вивід таблиці
 st.subheader("Результати після фільтрації")
 st.dataframe(df)
 
-# --- Mind Map після таблиці ---
-from graphviz import Digraph
-
+# Mind Map
 st.markdown("---")
 st.subheader("🧠 Mind Map – Основні інсайти з книги")
 
 dot = Digraph()
 dot.attr(bgcolor='white')
 dot.attr('node', shape='box', style='filled', fontname='Arial', color='lightblue')
-
 dot.node("Книга", "📘 Можливо все")
 
-# Показуємо лише перші 10 рядків (для краси та швидкості)
+# Показати перші 10 рядків
 for i, row in df.head(10).iterrows():
-    chapter = row.get("Назва розділу", f"Розділ {i}")
-    insight = row.get("Інсайти", "").strip()
-    author = row.get("Учасник", "")
+    chapter = row["Назва розділу"] if "Назва розділу" in row and pd.notna(row["Назва розділу"]) else f"Розділ {i}"
+    insight = str(row["Інсайти"]).strip() if "Інсайти" in row and pd.notna(row["Інсайти"]) else ""
+    author = str(row["Учасник"]).strip() if "Учасник" in row and pd.notna(row["Учасник"]) else ""
 
-    if pd.notna(chapter) and pd.notna(insight):
+    if chapter and insight:
         chapter_node = f"chapter_{i}"
         insight_node = f"insight_{i}"
 
