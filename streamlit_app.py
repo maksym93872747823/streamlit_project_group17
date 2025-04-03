@@ -53,16 +53,21 @@ h1, .st-subheader, h2 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin-top: 12px;
 }
-/* Заголовок Expander – обновлено */
+/* Заголовок Expander – финальный фикс */
 .streamlit-expanderHeader {
     font-weight: bold;
     color: #000000 !important;
     background-color: #ffffff !important;
-    padding: 12px 16px;
+    padding: 14px 18px;
     border-radius: 12px !important;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    z-index: 10;
+    position: relative;
 }
+
 </style>
 ''', unsafe_allow_html=True)
 
